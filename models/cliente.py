@@ -18,7 +18,7 @@ class Cliente:
 
     # Getter para obtener el nombre del cliente
     def get_nombre(self):
-        return self._nombre"
+        return self._nombre
 
     # Setter para asignar el nombre con validaciones
     def set_nombre(self, nombre):
