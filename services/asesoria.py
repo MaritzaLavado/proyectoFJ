@@ -1,12 +1,31 @@
 from models.servicio import Servicio
-
+    
 class Asesoria(Servicio):
-    def __init__(self, nombre="", tarifa_hora=0):
-        super().__init__(nombre)
-        self.tarifa_hora = tarifa_hora
-
-    def calcular_costo(self, horas=1):
-        return 0
+    def __init__(self, horas):
+        # El nombre para esta hija siempre será "Asesoría" y la tarifa siempre 200.000 (Por hora)
+        super().__init__("Asesoría", 200000, horas)
 
     def descripcion(self):
-        return "Asesoría especializada"
+        
+        mensaje_base = super().descripcion()  # Usamos el mensaje base del padre (EN CADA CLASE)
+        # Le concatenamos los detalles especificos por clase hija (tipo de asesoria)
+        detalles = (f". \nPara este servicio se cobra por hora ${self.get_tarifa():,}\n"
+                   f"Pues, te guiamos paso a paso en soluciones de software y buenas\n" 
+                   f"prácticas, resolviendo todas tus dudas de manera 100% personalizada\n")
+        return mensaje_base + detalles
+
+    def calcularCosto(self, iva=0.19, cupon=None):
+        # Validamos que sea mayor a 0
+        if self.get_horas() <= 0:
+            raise ValueError("La cantidad de horas debe ser mayor a cero.")
+
+        # Calculo base con IVA
+        subtotal = self.get_tarifa() * self.get_horas() #Multiplicamos valor tarifa por cantidad de horas
+        total = subtotal * (1 + iva) #Si no tiene cupon se devuelve el total mas el iva predeterminado
+
+        # Lógica del Cupón (Sobrecarga)
+        # Si cupon es None, no se hace este proceso. Si tiene un cupón, o sea un valor, lo hace.
+        if cupon is not None:
+            total = total * (1 - cupon) # Le resta la cantidad necesaria segun la catidad del cupon
+            
+        return round(total) # Devuelve el total redondeado, sin ningun decimal
