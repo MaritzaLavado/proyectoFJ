@@ -1,6 +1,6 @@
 from models.servicio import Servicio
 
-#ACA VALIDAR QUE SEA SUPERIOR A 3 HORAS
+#ACA VALIDAR QUE SEA SUPERIOR A 2 HORAS
 class reserva_sala(Servicio):
     def __init__(self, horas):
         # Modifique el nombre de esta hija y la tarifa  (Por hora)

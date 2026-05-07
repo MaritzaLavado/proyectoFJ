@@ -1,6 +1,6 @@
 from models.servicio import Servicio
 
-#ACA DEBE DE PONER 3 TIPOS DE EQUIPOS DIFERENTES, CON TARIFA DIFERENTE    
+#ACA DEBE DE PONER 2 TIPOS DE EQUIPOS DIFERENTES, CON TARIFA DIFERENTE    
 class alquiler_equipo(Servicio):
     def __init__(self, horas):
         # Modifique el nombre de esta hija y la tarifa  (Por hora)
