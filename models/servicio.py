@@ -7,7 +7,7 @@ class Servicio(ABC):
         self.__horas = horas    # Las define el usuario, pedirlas en el main
 
     @abstractmethod  # Es un método abstracto
-    def calcularCosto(self, iva=0.19, cupon=None):
+    def calcular_costo(self, iva=0.19, cupon=None):
         # Cada Hija debe de llevar su cálculo especifico usando los atributos internos
         # Todas las hijas deben usar IVA y un cupón opcional para hacer SOBRECARGA
         # Es posible cambiar el valor del IVA pero no lo haremos para mas fidelidad a la realidad
