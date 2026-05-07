@@ -18,7 +18,7 @@ class Cliente:
 
     # Getter para obtener el nombre del cliente
     def get_nombre(self):
-        return self._nombre
+        return self.__nombre
 
     # Setter para asignar el nombre con validaciones
     def set_nombre(self, nombre):
@@ -29,11 +29,11 @@ class Cliente:
             # Validación: el nombre debe tener mínimo 3 caracteres
             raise ClienteError("El nombre debe tener al menos 3 caracteres.")
         # Se guarda el nombre con formato limpio (sin espacios y con mayúscula inicial)
-        self._nombre = nombre.strip().title()
+        self.__nombre = nombre.strip().title()
 
     # Getter para obtener el email del cliente
     def get_email(self):
-        return self._email
+        return self.__email
 
     # Setter para asignar el email con validación de formato
     def set_email(self, email):
@@ -42,15 +42,9 @@ class Cliente:
             # Validación: si no cumple el patrón, se lanza excepción
             raise ClienteError("Formato de correo electrónico inválido.")
         # Se guarda el email en minúsculas
-        self._email = email.lower()
+        self.__email = email.lower()
 
     # Método especial para mostrar el cliente en texto legible
     def __str__(self):
-        return f"Cliente: {self._nombre}, Email: {self._email}"
+        return f"Cliente: {self.__nombre}, Email: {self.__email}"
 
-    # Método opcional para solicitar datos desde consola (para integración con Reserva)
-    @staticmethod
-    def input_cliente():
-        nombre = input("Ingrese el nombre del cliente: ")
-        email = input("Ingrese el correo del cliente: ")
-        return Cliente(nombre, email)
