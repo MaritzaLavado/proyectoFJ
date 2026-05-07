@@ -18,7 +18,7 @@ class Cliente:
 
     # Getter para obtener el nombre del cliente
     def get_nombre(self):
-        return self._nombre
+        return self._nombre"
 
     # Setter para asignar el nombre con validaciones
     def set_nombre(self, nombre):
@@ -47,3 +47,10 @@ class Cliente:
     # Método especial para mostrar el cliente en texto legible
     def __str__(self):
         return f"Cliente: {self._nombre}, Email: {self._email}"
+
+    # Método opcional para solicitar datos desde consola (para integración con Reserva)
+    @staticmethod
+    def input_cliente():
+        nombre = input("Ingrese el nombre del cliente: ")
+        email = input("Ingrese el correo del cliente: ")
+        return Cliente(nombre, email)
