@@ -1,23 +1,22 @@
 from models.servicio import Servicio
 
-#ACA VALIDAR QUE SEA SUPERIOR A 2 HORAS
-class reserva_sala(Servicio):
+# Clase hija que hereda de la clase abstracta Servicio
+class ReservaSala(Servicio):
+
     def __init__(self, horas):
-        # Modifique el nombre de esta hija y la tarifa  (Por hora)
-        super().__init__("Asesoría", 200000, horas)
+        # Se define automáticamente el nombre del servicio,
+        # la tarifa por hora y las horas ingresadas por el usuario
+        super().__init__("Reserva de sala", 50000, horas)
 
-    def descripcion(self):
-        
-        mensaje_base = super().descripcion()  # Usamos el mensaje base del padre (EN CADA CLASE)
-        # Le concatenamos los detalles especificos por clase hija (tipo de asesoria)
-        pass
-
+    # Implementación del método abstracto de la clase padre
     def calcular_costo(self, iva=0.19, cupon=None):
-        # Validamos que sea mayor a 0
-        if self.get_horas() <= 0:
-            raise ValueError("La cantidad de horas debe ser mayor a cero.")
 
-        # Calculo base con IVA
+        # Validación:
+        # La reserva debe ser superior a 2 horas
+        if self.get_horas() <= 2:
+            raise ValueError("La reserva de sala debe ser superior a 2 horas.")
+
+         # Calculo base con IVA
         subtotal = self.get_tarifa() * self.get_horas() #Multiplicamos valor tarifa por cantidad de horas
         total = subtotal * (1 + iva) #Si no tiene cupon se devuelve el total mas el iva predeterminado
 
@@ -27,3 +26,16 @@ class reserva_sala(Servicio):
             total = total * (1 - cupon) # Le resta la cantidad necesaria segun la catidad del cupon
             
         return round(total) # Devuelve el total redondeado, sin ningun decimal
+
+    # Polimorfismo:
+    # Se sobrescribe el método descripcion()
+    # para explicar brevemente en qué consiste el servicio
+    
+    def descripcion(self):
+        
+        mensaje_base = super().descripcion()  # Usamos el mensaje base del padre (EN CADA CLASE)
+        # Le concatenamos los detalles especificos por clase hija (tipo de asesoria)
+        detalles = (f". \nPara este servicio se cobra por hora ${self.get_tarifa():,}\n"
+                   f"El servicio de reserva de sala está disponible para reservas superiores a 2 horas\n" 
+                   f"y acceder a espacios adecuados para reuniones, eventos o actividades empresariales\n")
+        return mensaje_base + detalles
