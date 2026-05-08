@@ -4,14 +4,13 @@ from models.servicio import Servicio
 class ReservaSala(Servicio):
 
     def __init__(self, horas):
-        # Se define automáticamente:
-        # nombre del servicio
-        # tarifa por hora
-        # horas ingresadas por el usuario
+        # Se define automáticamente el nombre del servicio,
+        # la tarifa por hora y las horas ingresadas por el usuario
         super().__init__("Reserva de sala", 50000, horas)
 
-    # Implementación obligatoria del método abstracto
+    # Implementación del método abstracto de la clase padre
     def calcular_costo(self, iva=0.19, cupon=None):
+
         # Validación:
         # La reserva debe ser superior a 2 horas
         if self.get_horas() <= 2:
@@ -32,12 +31,11 @@ class ReservaSala(Servicio):
 
     # Polimorfismo:
     # Se sobrescribe el método descripcion()
-    # concatenando el mensaje base del padre con el detalle específico
+    # para explicar brevemente en qué consiste el servicio
     def descripcion(self):
-        mensaje_base = super().descripcion()  # Llama al método de la clase padre
-        detalles = (
-            f" Has reservado una sala de reuniones por "
-            f"{self.get_horas()} horas con una tarifa de "
-            f"{self.get_tarifa()} por hora."
+        return (
+            "El servicio de reserva de sala está disponible "
+            "para reservas superiores a 2 horas y permite "
+            "acceder a espacios adecuados para reuniones, "
+            "eventos o actividades empresariales."
         )
-        return f"{mensaje_base}{detalles}"
