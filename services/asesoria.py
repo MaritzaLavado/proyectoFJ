@@ -15,9 +15,7 @@ class Asesoria(Servicio):
         return mensaje_base + detalles
 
     def calcular_costo(self, iva=0.19, cupon=None):
-        # Validamos que sea mayor a 0
-        if self.get_horas() <= 0:
-            raise ValueError("La cantidad de horas debe ser mayor a cero.")
+
 
         # Calculo base con IVA
         subtotal = self.get_tarifa() * self.get_horas() #Multiplicamos valor tarifa por cantidad de horas
