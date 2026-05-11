@@ -64,11 +64,14 @@ El sistema permite gestionar clientes, servicios y reservas sin utilizar bases d
 
 ## Ejecución
 
-Para ejecutar el sistema:
+Para ejecutar el sistema desde la terminal utilice el siguiente comando, siempre que Python se encuentre instalado y configurado en las variables de entorno del sistema:
 
 ```bash
 python main.py
 ```
+
+En caso de que el comando no sea reconocido por la terminal, el proyecto también puede ejecutarse directamente desde el archivo `main.py` utilizando la opción **Run** en Visual Studio Code.
+
 ## Integrantes
 
 - Yudy Maritza Lavado Cañón
