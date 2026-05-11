@@ -8,7 +8,9 @@ class AlquilerEquipo(Servicio):
         Dependiendo del tipo de equipo se asigna una tarifa diferente.
         """
 
-        super().__init__(tipo_equipo)
+        # CORRECCIÓN: validar horas antes de crear el servicio
+        if horas <= 0:
+            raise ValueError("La cantidad de horas debe ser mayor a cero.")
 
         # Validación del tipo de equipo
         tipos_validos = ["tablet", "portatil"]
@@ -18,19 +20,17 @@ class AlquilerEquipo(Servicio):
                 "Tipo de equipo inválido. Solo se permite: Tablet o Portátil."
             )
 
-        self.tipo_equipo = tipo_equipo.lower()
+        # CORRECCIÓN: normalizar el nombre antes de usarlo
+        tipo_equipo = tipo_equipo.lower()
 
-        # Tarifas por hora según el equipo
-        if self.tipo_equipo == "tablet":
-            self.tarifa_hora = 8000
+        # CORRECCIÓN: definir tarifa antes de llamar al constructor padre
+        if tipo_equipo == "tablet":
+            tarifa = 8000
         else:
-            self.tarifa_hora = 15000
+            tarifa = 15000
 
-        # Validación de horas
-        if horas <= 0:
-            raise ValueError("La cantidad de horas debe ser mayor a cero.")
-
-        self.horas = horas
+        # CORRECCIÓN: enviar correctamente nombre, tarifa y horas al padre
+        super().__init__(tipo_equipo, tarifa, horas)
 
     def descripcion(self):
         """
@@ -38,9 +38,10 @@ class AlquilerEquipo(Servicio):
         """
 
         return (
-            f"\nServicio de alquiler de {self.tipo_equipo.capitalize()}"
-            f"\n Tarifa por hora: ${self.tarifa_hora}"
-            f"\n Horas solicitadas: {self.horas}"
+            # CORRECCIÓN: usar getters heredados en lugar de atributos inexistentes
+            f"\nServicio de alquiler de {self.get_nombre().capitalize()}"
+            f"\n Tarifa por hora: ${self.get_tarifa()}"
+            f"\n Horas solicitadas: {self.get_horas()}"
             "\n Equipos en excelente estado"
             "\n Soporte técnico incluido"
         )
@@ -51,7 +52,7 @@ class AlquilerEquipo(Servicio):
         """
 
         # Cálculo base
-        subtotal = self.tarifa_hora * self.horas
+        subtotal = self.get_tarifa() * self.get_horas()
 
         # Aplicar IVA
         total = subtotal + (subtotal * iva)

@@ -2,6 +2,12 @@ from abc import ABC, abstractmethod
 
 class Servicio(ABC):
     def __init__(self, nombre, tarifa, horas):
+
+        if tarifa <= 0:
+            raise ValueError("La tarifa debe ser mayor a cero.")
+        if horas <= 0:
+            raise ValueError("La cantidad de horas debe ser mayor a cero.")        
+
         self.__nombre = nombre  # Este nombre sera predefinido por las hijas
         self.__tarifa = tarifa  # Este valor será predefinido por las hijas
         self.__horas = horas    # Las define el usuario, pedirlas en el main
